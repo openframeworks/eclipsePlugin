@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/cc.openframeworks.feature_0.1.0.qualifier.jar" id="cc.openframeworks.feature" version="0.1.0.qualifier" os="linux">
+      <category name="cc.openframeworks.category"/>
+   </feature>
+   <category-def name="cc.openframeworks.category" label="openFrameworks plugins">
+      <description>
+         openFrameworks plugins
+      </description>
+   </category-def>
+</site>

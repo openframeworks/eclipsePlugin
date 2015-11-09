@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- Define the OF project wizard -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard
+	        canFinishEarly="false"
+	        hasPages="true"
+	        name="openFrameworks application"
+	        icon="icons/ofw-logo.png"
+	        class="cc.openframeworks.plugin.wizards.OFNewWizard"
+			category="org.eclipse.cdt.ui.newCWizards"
+	        id="cc.openframeworks.plugin.wizards.OFNewWizard"
+	        finalPerspective="org.eclipse.cdt.ui.CPerspective"
+	        project="true">
+		</wizard>
+	</extension>
+	
+	<!-- This should add the project to File > New but it doesn't -->
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+	  	<perspectiveExtension targetID="org.eclipse.cdt.ui.CPerspective">
+	    	<newWizardShortcut id="cc.openframeworks.plugin.wizards.OFNewWizard"></newWizardShortcut>
+		</perspectiveExtension>
+	</extension>
+	
+	<!-- Preferences page -->
+	<extension point="org.eclipse.ui.preferencePages">
+		<page id="cc.openframeworks.plugin.PreferencePage" name="openFrameworks" class="cc.openframeworks.plugin.PreferencePage"/>
+	</extension>
+	
+	<!-- Properties page -->
+    <extension
+         point="org.eclipse.ui.propertyPages">
+        <page
+            name="openFrameworks"
+            class="cc.openframeworks.plugin.PropertyPage"
+            id="cc.openframeworks.plugin.propertyPage">         
+         <filter
+               name="projectNature"
+               value="org.eclipse.cdt.core.cnature">
+         </filter>            
+         <enabledWhen>
+            <or>
+		     <adapt type="org.eclipse.core.resources.IProject"/>
+		     <instanceof value="org.eclipse.cdt.core.model.ICContainer"/>
+		    </or>          
+         </enabledWhen>
+        </page>
+    </extension>
+</plugin>
