@@ -88,7 +88,9 @@ public class Utils {
 				}
 			}
 			bw.close();
-		} catch (IOException | URISyntaxException e) {
+		} catch (URISyntaxException e) {
+			throwCoreException(e.getMessage());
+		} catch (IOException e) {
 			throwCoreException(e.getMessage());
 		}
 	}

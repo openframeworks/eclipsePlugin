@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.core.runtime,
  org.eclipse.cdt.managedbuilder.core,
  org.eclipse.cdt.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: openFrameworks
 Export-Package: cc.openframeworks.plugin,
  cc.openframeworks.plugin.wizards

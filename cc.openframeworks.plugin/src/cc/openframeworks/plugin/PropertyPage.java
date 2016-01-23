@@ -149,7 +149,7 @@ public class PropertyPage extends org.eclipse.ui.dialogs.PropertyPage {
 				((IResource) getElement()).setPersistentProperty(
 					new QualifiedName("", "OF_ROOT"),
 					ofRoot);
-				IProject project = ((IResource) getElement()).getProject();
+				final IProject project = ((IResource) getElement()).getProject();
 				IManagedBuildInfo buildInfo = ManagedBuildManager.getBuildInfo(project);
 				IConfiguration debugConfig = buildInfo.getManagedProject().getConfiguration("cc.openframeworks.configurations.debug");
 				IBuilder bld = debugConfig.getEditableBuilder();
@@ -172,7 +172,7 @@ public class PropertyPage extends org.eclipse.ui.dialogs.PropertyPage {
 				}else{
 					bld.setIncrementalBuildTarget("Release");
 				}
-				WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
+				final WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
 					public void execute(IProgressMonitor monitor) throws CoreException{
 						try {
 							project.build(project.getActiveBuildConfig(),IncrementalProjectBuilder.CLEAN_BUILD,monitor);
@@ -188,7 +188,10 @@ public class PropertyPage extends org.eclipse.ui.dialogs.PropertyPage {
 					public void run(IProgressMonitor monitor) throws CoreException {
 						try {
 							op.run(monitor);
-						} catch (InvocationTargetException | InterruptedException e) {
+						} catch (InvocationTargetException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
