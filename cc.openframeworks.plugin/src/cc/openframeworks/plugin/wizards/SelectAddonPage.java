@@ -102,34 +102,38 @@ public class SelectAddonPage extends WizardPage{
 		String ofRoot = Activator.getDefault().getPreferenceStore().getString("OF_ROOT");
 		if(ofRoot!=null && ofRoot!=""){
 		    File addonsFolder = new File(ofRoot + "/addons");
-		    ArrayList<String> addonsNames = new ArrayList<String>();
-		    for(File f:addonsFolder.listFiles()){
-		    	if(f.isDirectory() && f.getName().startsWith("ofx")){
-		    		addonsNames.add(f.getName());
-		    	}
-		    } 
-		    Collections.sort(addonsNames, new Comparator<String>() {
-				@Override
-				public int compare(String o1, String o2) {
-					return o1.compareTo(o2);
-				}
-			});
+			if (!f.exists()) {
+				setMessage("Directory \""+ofRoot+"/addons\" not found, please check openFrameworks path set in Windows > Preferences > openFrameworks",WizardPage.WARNING);
+			} else {
+			    ArrayList<String> addonsNames = new ArrayList<String>();
+			    for(File f:addonsFolder.listFiles()){
+			    	if(f.isDirectory() && f.getName().startsWith("ofx")){
+			    		addonsNames.add(f.getName());
+			    	}
+			    } 
+			    Collections.sort(addonsNames, new Comparator<String>() {
+					@Override
+					public int compare(String o1, String o2) {
+						return o1.compareTo(o2);
+					}
+				});
 
-		    for(String f: addonsNames){
-		    	if(invalidAddons.contains(f)){
-		    		continue;
-		    	}
-		    	TreeItem item;
-		    	if(officialAddons.contains(f)){
-		    		item = new TreeItem(officialAddonsList, SWT.NONE);
-		    	}else{
-		    		item = new TreeItem(addonsList, SWT.NONE);
-		    	}
-		    	item.setText(f);
-	    		if(currentAddons.contains(f)){
-	    			item.setChecked(true);
-	    		}
-		    }
+			    for(String f: addonsNames){
+			    	if(invalidAddons.contains(f)){
+			    		continue;
+			    	}
+			    	TreeItem item;
+			    	if(officialAddons.contains(f)){
+			    		item = new TreeItem(officialAddonsList, SWT.NONE);
+			    	}else{
+			    		item = new TreeItem(addonsList, SWT.NONE);
+			    	}
+			    	item.setText(f);
+		    		if(currentAddons.contains(f)){
+		    			item.setChecked(true);
+		    		}
+			    }
+			}
 		}else{
 			setMessage("Can't parse avaliable addons until openFrameworks path is set in Windows > Preferences > openFrameworks",WizardPage.WARNING);
 		}
